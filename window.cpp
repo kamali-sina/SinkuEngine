@@ -15,3 +15,7 @@ Window::Window(int width, int height, string window_name) {
     height_ = height;
     window_name_ = window_name;
 }
+
+void Window::update() {
+    SDL_UpdateWindowSurface(window);
+}

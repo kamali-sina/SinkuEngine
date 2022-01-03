@@ -9,6 +9,7 @@
 class Window {
     public:
     Window(int width, int height, std::string window_name="main window");
+    void update();
 
     // vector<Component*>
     SDL_Window* window;

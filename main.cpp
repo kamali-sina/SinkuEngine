@@ -14,6 +14,6 @@ int main(int argc , char *argv[]) {
     Window* window = new Window(1920, 1080, "fuck you");
 
     SDL_FillRect( window->window_surface, NULL, SDL_MapRGB( window->window_surface->format, 0xCC, 0xFF, 0xFF ) );
-    SDL_UpdateWindowSurface(window->window);
+    window->update();
     SDL_Delay(2000);
 }
