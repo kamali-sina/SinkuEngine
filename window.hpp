@@ -13,7 +13,8 @@ class Window {
 
     // vector<Component*>
     SDL_Window* window;
-    SDL_Surface* window_surface;
+    SDL_Surface* surface;
+    SDL_Renderer* renderer;
     int width_;
     int height_;
     std::string window_name_;
