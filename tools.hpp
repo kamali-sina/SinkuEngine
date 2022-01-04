@@ -6,5 +6,6 @@
 #include <SDL2/SDL.h>
 
 void sdl_error(std::string error_message);
+// TODO: Add loadimage
 
 #endif
