@@ -3,7 +3,7 @@ CC := g++ -pthread
 BUILD_DIR=build
 SRC_DIR=.
 COMPILER_FLAGS = -w
-LINKER_FLAGS = -lSDL2
+LINKER_FLAGS = -lSDL2 -lSDL2_image
 OUTPUT_NAME=main.out
 
 all: ${OUTPUT_NAME}
