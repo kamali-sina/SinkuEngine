@@ -1,6 +1,7 @@
 #include "window.hpp"
 #include "component.hpp"
-#include<SDL2/SDL.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 using namespace std;
 
@@ -11,6 +12,11 @@ int main(int argc , char *argv[]) {
 		sdl_error("SDL could not initialize!");
         exit(1);
 	}
+
+    if (IMG_Init( IMG_INIT_PNG ) < 0) {
+        sdl_image_error("IMG could not initialize!");
+        exit(1);
+    } 
 
     Window* window = new Window(800, 600, "fuck you");
     
