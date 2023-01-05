@@ -1,50 +1,30 @@
-#include "window.hpp"
-#include "component.hpp"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
 using namespace std;
-
-
-int main(int argc , char *argv[]) {
-    // main program for testing the engine
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
-		sdl_error("SDL could not initialize!");
-        exit(1);
-	}
-
-    if (IMG_Init( IMG_INIT_PNG ) < 0) {
-        sdl_image_error("IMG could not initialize!");
-        exit(1);
-    } 
-
-    Window* window = new Window(800, 600, "fuck you");
-    
-    Button *button = new Button(SDL_Rect({0,0, 50, 50}), "fuck you");
-    bool quit = false;
-
-
-    while(!quit) {
-        SDL_Event evt;
-
-        while(SDL_PollEvent(&evt)) {
-            // quit on close, window close, or 'escape' key hit
-            if(evt.type == SDL_QUIT ||
-                    (evt.type == SDL_WINDOWEVENT && evt.window.event == SDL_WINDOWEVENT_CLOSE) ||
-                    (evt.type == SDL_KEYDOWN && evt.key.keysym.sym == SDLK_ESCAPE)) {
-                quit = true;
+int main()
+{
+	sf::RenderWindow window(sf::VideoMode(400, 400), "Yosk");
+	sf::CircleShape shape(200);
+    shape.setFillColor(sf::Color(255,0,0));
+    int r = 200;
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
+				window.close();
+            } else if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Key::J) {
+                    shape.setRadius(--r);
+                    shape.setPosition(shape.getPosition().x + 1, shape.getPosition().y);
+                }
             }
-            button->checkClicked(&evt);
-            // TODO: Handle Buttons
-            // TODO: Handle key presses
         }
-        
-        SDL_SetRenderDrawColor(window->renderer, 200, 100, 110, 255);
-        SDL_RenderClear(window->renderer);
-        button->render(window->renderer);
-        SDL_RenderPresent(window->renderer);
-    }
-    SDL_DestroyWindow(window->window);
-    SDL_DestroyRenderer(window->renderer);
-    return 0;
+
+		window.clear();
+		window.draw(shape);
+		window.display();
+	}
+	return 0;
 }
