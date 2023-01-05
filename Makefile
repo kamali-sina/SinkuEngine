@@ -1,7 +1,7 @@
 CC := g++ -pthread
 
 BUILD_DIR=build
-SRC_DIR=.
+SRC_DIR=./src
 COMPILER_FLAGS = -w -I /opt/homebrew/Cellar/sfml/2.5.1_2/include
 LINKER_FLAGS = -L /opt/homebrew/Cellar/sfml/2.5.1_2/lib -lsfml-graphics -lsfml-window -lsfml-system
 OUTPUT_NAME=game.out
