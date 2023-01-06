@@ -2,6 +2,31 @@
 #include <iostream>
 
 using namespace std;
+
+class Button {
+	sf::Sprite _sprite;
+	public:
+	Button(sf::Sprite &shape) {
+		_sprite = shape;
+	}
+
+	void draw(sf::RenderWindow &window) {
+		window.draw(_sprite);
+	}
+
+	void update(sf::Event &event) {
+		if (event.type == sf::Event::MouseMoved) {
+			if (_sprite.getGlobalBounds().contains(event.mouseMove.x, event.mouseMove.y)) {
+				cout<<"disappearing" <<endl;
+				_sprite.setColor(sf::Color(255,255,255, 100));
+			} else {
+				cout<<"appearing..." <<endl;
+				_sprite.setColor(sf::Color(255,255,255, 255));
+			}
+		}
+	}
+};
+
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(400, 400), "Yosk");
@@ -16,7 +41,24 @@ int main()
 	sf::RectangleShape shape3(sf::Vector2f(50,50));
 	shape3.setPosition(50,50);
 	shape3.setFillColor(sf::Color(0,255,0));
+
+	
     int r = 200;
+
+	sf::Font font;
+
+	if (!font.loadFromFile("RubikBubbles-Regular.ttf")) {
+		cout<<"we are fucked!"<<endl;
+		exit(0);
+	}
+
+	sf::Texture texture;
+	texture.loadFromFile("button.png");
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+
+	Button b(sprite);
+
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -33,10 +75,12 @@ int main()
 					shape3.setPosition(shape3.getPosition().x + 5, shape3.getPosition().y);
 				}
 			}
+			b.update(event);
         }
 
 		window.clear();
-		window.draw(shape3);
+		// window.draw(shape3);
+		b.draw(window);
 		// window.draw(shape2);
 		window.display();
 	}
